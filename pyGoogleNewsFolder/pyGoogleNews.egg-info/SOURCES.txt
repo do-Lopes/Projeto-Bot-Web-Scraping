@@ -1,0 +1,5 @@
+setup.py
+pyGoogleNews.egg-info/PKG-INFO
+pyGoogleNews.egg-info/SOURCES.txt
+pyGoogleNews.egg-info/dependency_links.txt
+pyGoogleNews.egg-info/top_level.txt
