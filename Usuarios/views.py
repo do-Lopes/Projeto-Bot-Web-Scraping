@@ -1,8 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Usuario
-from enviar_email.models import Noticia
 from hashlib import sha256
 
 filtrado = []
@@ -61,19 +59,30 @@ def cadastrar_filtros(request):
         filtro = filtro.upper().strip()
         if len(filtro) > 0:
             filtrado.append(filtro)
-            return redirect('/email/home/?status=0') 
-        else: 
-            return redirect('/email/home/?status=2')
+            return redirect('/auth/home/?status=0')
+        if len(filtro) == 0: 
+            return redirect('/auth/home/?status=2')
     elif request.POST.get("salvar"):
         Usuario.objects.filter(id = request.session['usuario']).update(filtro = filtrado)
         filtrado.clear()
-        return redirect('/email/home/?status=1')
+        return redirect('/auth/home/?status=1')
+    elif request.POST.get("redefinir"):
+        filtrado.clear()
+        Usuario.objects.filter(id = request.session['usuario']).update(filtro = filtrado)
+        return redirect('/auth/home/?status=3')
+    
+def cadastrar_lingua_regiao(request):
+    if request.method == 'POST':
+        regions = request.POST.getlist('regioes')
+        new_region = []
+        Usuario.objects.filter(id = request.session['usuario']).update(region = regions)
+        new_region.clear()
+        return redirect('/auth/home/?status=1')
 
 def home(request):
     status = request.GET.get('status')
-    if request.session.get('usuario'):
-        noticias = Noticia.objects.all()
-        return render(request, 'filtros.html',{'status': status, 'noticia': noticias})
+    if request.session.get('usuario'):        
+        return render(request, 'index_filtros.html', {'status': status})
     else:
         return redirect('/auth/login/?status=2')
 

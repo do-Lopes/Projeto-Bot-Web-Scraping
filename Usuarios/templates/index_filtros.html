@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>        
+        body{
+            margin: 0;
+            font-family: sans-serif;
+            background: rgb(127, 168, 255);
+        }
+
+        header img{
+            width: 40px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 240px;
+            background-color: rgba(72, 129, 253, 1);
+            border: 2px solid rgb(225, 255, 0);
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+
+        main{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+
+        .right-filtros{
+            width: 50vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .left-login > h1{
+            color: rgb(225, 255, 0);
+        }
+
+        .left-filtros{
+            width: 50vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-regioes{
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 30px 35px;
+            background: rgb(72, 129, 253);
+            border-radius: 30px;
+            box-shadow: 4px 8px 20px black;
+        }
+
+        .card-regioes > h1{
+            color: rgb(225, 255, 0);
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .left-login > h1{
+            color: rgb(225, 255, 0);
+        }
+
+        .left-filtros{
+            width: 50vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-filtros{
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 30px 35px;
+            background: rgb(72, 129, 253);
+            border-radius: 30px;
+            box-shadow: 4px 8px 20px black;
+        }
+
+        .card-filtros > h1{
+            color: rgb(225, 255, 0);
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .textfield{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .entradas{
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            background: rgb(143, 179, 255);
+            color: rgb(255, 255, 255);
+            font-size: 12pt;
+            box-shadow: 4px 4px 15px black;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .textfield > label{
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .textfield > input::placeholder{
+            color: rgb(255, 255, 255);
+        }
+
+        .btn-adicionar{
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            width: 100%;
+            padding: 15px 0px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 10px;
+            text-transform: uppercase;
+            color: rgb(225, 255, 0);
+            background: rgb(0, 0, 255);
+            cursor: pointer;
+        }
+
+        .btn-adicionar:hover{
+            box-shadow: 0px 5px 30px rgb(0, 0, 255);
+        }
+
+        .btn-salvar{
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            width: 100%;
+            padding: 15px 0px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 10px;
+            text-transform: uppercase;
+            color: rgb(72, 129, 253);
+            background: rgb(225, 255, 0);
+            cursor: pointer;
+        }
+
+        .btn-salvar:hover{
+            box-shadow: 0px 5px 30px rgb(225, 255, 0);
+        }
+
+        .btn-redefinir{
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            width: 100%;
+            padding: 15px 0px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 10px;
+            text-transform: uppercase;
+            color: rgb(225, 255, 0);
+            background: rgb(255, 0, 0);
+            cursor: pointer;
+        }
+
+        .btn-redefinir:hover{
+            box-shadow: 0px 5px 30px rgb(255, 0, 0);
+        }
+
+        .aux-text{
+            color: white;
+        }
+
+        .btn-lg{
+            width: 100%;
+            padding: 15px 0px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            color: rgb(225, 255, 0);
+            text-decoration: none;
+        }
+
+        .btn-lg:hover{
+            text-decoration: underline;
+        }
+
+        .alert-primary{
+            background: rgba(255, 255, 0, 0.367);
+            width: 200px;
+            font-weight: 600;
+            margin: 10px 0 0 10px;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid yellow;
+            border-radius: 20px;
+        }
+
+        .alert-success{
+            background: rgba(19, 255, 19, 0.367);
+            width: 200px;
+            display: inline-block;
+            position: absolute;
+            font-weight: 600;
+            margin: 10px 0 0 10px;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid green;
+            border-radius: 20px;
+        }
+
+        .alert-danger{
+            background: rgba(255, 0, 0, 0.367);
+            width: 200px;
+            font-weight: 600;
+            margin: 10px 0 0 10px;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid rgb(255, 0, 0);
+            border-radius: 20px;
+        }
+
+        .switch{
+            display: flex;
+            justify-content: right;
+            margin-bottom: 5px;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .switch .switch-text {
+            padding-right: 10px;
+            font-size: 16px;
+        }
+
+        .switch .switch-wrapper{
+            display: inline-block;
+            width: 42px;
+            height: 22px;
+            position: relative;
+        }
+
+        .switch .switch-wrapper .switch-button{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 40px;
+            background-color: grey;
+        }
+
+        .switch .switch-wrapper input{
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch .switch-wrapper .switch-button::before{
+            content: "";
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            left: 2px;
+            bottom: 2px;
+            border-radius: 50%;
+            transition: .4s all ease;
+            background-color: aliceblue;
+        }
+
+        .switch .switch-wrapper input:checked + .switch-button{
+            background-color: green;
+        }
+
+        .switch .switch-wrapper input:checked + .switch-button::before{
+            transform: translateX(20px);
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="tooltip"><img src="https://www.i2symbol.com/images/text-symbols/i-symbol.png" alt=""><span class="tooltiptext">Escreva um filtro e clique em "Adicionar", quando tiver adicionado todos clique em "salvar". Nos filtro de regiões escolha todas as regiões e clique em "salvar" no final da página</span></div>
+        {% if status == '1'%}
+        <div class="alert alert-success" role="alert">
+            Mudanças Salvas
+        </div>
+        {% endif %}
+    </header>
+    <main>
+        <div class="left-filtros">
+           <div class="card-filtros">
+            <h1>Adicione filtros</h1>
+            <form  class="textfield" method="POST" action="{% url 'cadastrar_filtros' %}">{% csrf_token %}
+                <input name="filtro" class="entradas" type="text" placeholder="Informe palavras-chave">
+                {% if status == '0'%}
+                <div class="alert-primary" role="alert">
+                    Mudanças Pendentes
+                </div>
+                {% endif %}                
+                {% if status == '2'%}
+                <div class="alert-danger" role="alert">
+                    Informe uma palavra-chave válida
+                </div>
+                {% endif %}
+                {% if status == '3'%}
+                <div class="alert-danger" role="alert">
+                    Filtros redefinidos
+                </div>
+                {% endif %}
+                <input name="adicionar" class="btn-adicionar" type="submit" value="Adicionar">
+                <input name="salvar" class="btn-salvar" type="submit" value="Salvar">
+                <input name="redefinir" class="btn-redefinir" type="submit" value="Redefinir"> 
+            </form>
+           </div>
+        </div>
+        <div class="right-filtros">
+            <div class="card-regioes">
+            <h1>Selecione as regiões</h1>
+            <form method="POST" action="{% url 'cadastrar_lingua_regiao' %}">{% csrf_token %}
+                <div class="form-check">
+                    <label for="pt-BR" class="switch">
+                        <span class="switch-text">Lingua: Português // Região: Brasil</span>
+                            <div class="switch-wrapper">
+                                <input type="checkbox" value="pt,BR" id="pt-BR" name="regioes"/>
+                                <span class="switch-button"></span>
+                            </div>                                             
+                    </label> 
+
+                    <label for="en-US" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Estados Unidos</span>
+                            <div class="switch-wrapper">
+                                <input type="checkbox" value="en,US" id="en-US" name="regioes">
+                                <span class="switch-button"></span>                        
+                            </div>                                             
+                    </label>
+
+                    <label for="en-AT"  class="switch">   
+                        <span class="switch-text">Lingua: Inglês // Região: Austrália</span>   
+                            <div class="switch-wrapper">
+                                <input type="checkbox" value="en,AT" id="en-AT" name="regioes">
+                                <span class="switch-button"></span>
+                            </div>   
+                    </label>                
+                
+                    <label for="en-CA" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Canadá</span>
+                            <div class="switch-wrapper">
+                                <input type="checkbox" value="en,CA" id="en-CA" name="regioes">
+                                <span class="switch-button"></span>
+                            </div>
+                    </label>
+
+                    <label for="en-IN" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: India</span>
+                            <div class="switch-wrapper">
+                                <input type="checkbox" value="en,IN" id="en-IN" name="regioes">
+                                <span class="switch-button"></span>
+                            </div>
+                    </label>                
+                
+                    <label for="en-IE" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Irlanda</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="en,IE" id="en-IE" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="en-IL" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Israel</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="en,IL" id="en-IL" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="en-NZ" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Nova Zelândia</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="en,NZ" id="en-NZ" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="en-SG" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Singapura</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="en,SG" id="en-SG" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="en-ZA" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Africa do Sul</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="en,ZA" id="en-ZA" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="en-UK" class="switch">
+                        <span class="switch-text">Lingua: Inglês // Região: Reino Unido</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="en,UK" id="en-UK" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>    
+                    </label>                
+                
+                    <label for="es-AR" class="switch">
+                        <span class="switch-text">Lingua: Espanhol // Região: Argentina</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="es,AR" id="es-AR" name="regioes">
+                            <span class="switch-button"></span>
+                        </div> 
+                    </label>                
+                
+                    <label for="es-CL" class="switch">
+                        <span class="switch-text">Lingua: Espanhol // Região: Chile</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="es,CL" id="es-CL" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="es-ES" class="switch">
+                        <span class="switch-text">Lingua: Espanhol // Região: Espanha</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="es,ES" id="es-ES" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="es-MX" class="switch">
+                        <span class="switch-text">Lingua: Espanhol // Região: México</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="es,MX" id="es-MX" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>                
+                
+                    <label for="es-PE" class="switch">
+                        <span class="switch-text">Lingua: Espanhol // Região: Peru</span>
+                        <div class="switch-wrapper">
+                            <input type="checkbox" value="es PE" id="es-PE" name="regioes">
+                            <span class="switch-button"></span>
+                        </div>
+                    </label>    
+                <input name="salvar" class="btn-salvar" type="submit" value="Salvar">
+            </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
